@@ -1,0 +1,23 @@
+.risk {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  margin-top: 10px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.risk.high {
+  background: #ffe9e9;
+  color: #d63031;
+}
+
+.risk.medium {
+  background: #fff6e2;
+  color: #f39c12;
+}
+
+.risk.low {
+  background: #e8f8f0;
+  color: #27ae60;
+}

@@ -1,0 +1,61 @@
+.confidence-grid{
+  display:flex;
+  gap:20px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.confidence-card{
+  background:white;
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:20px 25px;
+  width:160px;
+  cursor:pointer;
+  text-align:center;
+  transition:all 0.2s ease;
+}
+
+.confidence-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.confidence-emoji{
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.confidence-level{
+  font-weight:600;
+  font-size:16px;
+}
+
+.confidence-label{
+  font-size:13px;
+  color:var(--text-muted);
+  margin-top:4px;
+}
+
+/* Low confidence hover */
+
+.confidence-card.low:hover{
+  background:#fdecea;
+  border-color:#f5c6cb;
+}
+
+
+/* Medium confidence hover */
+
+.confidence-card.medium:hover{
+  background:#fff7e6;
+  border-color:#ffe8a1;
+}
+
+
+/* High confidence hover */
+
+.confidence-card.high:hover{
+  background:#e8f5e9;
+  border-color:#b7e4c7;
+}
