@@ -1,0 +1,178 @@
+.landing-container{
+  font-family:system-ui;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* NAVBAR */
+
+.landing-navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+}
+
+.landing-logo{
+  font-size:22px;
+  font-weight:600;
+  color:#9395d3;
+}
+
+/* Right side buttons */
+
+.landing-links{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+
+/* Login */
+
+.landing-links a{
+  text-decoration:none;
+  color:#9395d3;
+  font-weight:500;
+  padding:8px 10px;
+  transition:0.2s;
+}
+
+.landing-links a:hover{
+  color:#7f82d9;
+}
+
+
+/* Signup Button */
+
+.signup-btn{
+  background:#9395d3;
+  color:white !important;
+  padding:8px 16px;
+  border-radius:8px;
+  transition:0.2s;
+}
+
+.signup-btn:hover{
+  background:#7f82d9;
+  transform:translateY(-1px);
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:120px 20px 100px;
+  max-width:800px;
+  margin:auto;
+}
+
+.hero h1{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  font-size:18px;
+  color:#666;
+  margin-bottom:30px;
+}
+
+.hero-btn{
+  background:#9395d3;
+  color:white;
+  padding:12px 26px;
+  border-radius:8px;
+  text-decoration:none;
+  display:inline-block;
+  transition:all 0.2s ease;
+}
+
+.hero-btn:hover{
+  background:#7f82d9;
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
+
+
+/* FEATURES */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+  padding:80px 60px;
+}
+
+.feature-card{
+  padding:30px;
+  border-radius:10px;
+  border:1px solid #eee;
+  background:white;
+  transition:0.2s;
+}
+
+.feature-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+
+
+
+/* CTA */
+
+.cta{
+  text-align:center;
+  padding:80px 20px;
+}
+
+.cta h2{
+  margin-bottom:20px;
+}
+
+.cta-btn{
+  background:#9395d3;
+  color:white;
+  padding:12px 28px;
+  border-radius:8px;
+  text-decoration:none;
+  display:inline-block;
+  transition:all 0.2s ease;
+}
+
+.cta-btn:hover{
+  background:#7f82d9;
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
+
+
+
+/* FOOTER */
+
+.landing-footer{
+  text-align:center;
+  padding:40px;
+  color:#888;
+  border-top:1px solid #eee;
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .landing-navbar{
+    padding:20px;
+  }
+
+  .features{
+    padding:60px 20px;
+  }
+
+}

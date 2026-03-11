@@ -1,0 +1,41 @@
+.page-title{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:25px;
+}
+
+.add-topic-container{
+  display:flex;
+  gap:12px;
+  margin-bottom:30px;
+}
+
+.add-topic-container input{
+  flex:1;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #e5e5e5;
+}
+
+.add-topic-container button{
+  background:#9395d3;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+}
+
+@media (max-width:768px){
+
+  .add-topic-container{
+    flex-direction:column;
+  }
+
+}

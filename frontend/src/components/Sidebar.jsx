@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ open, sidebarRef }) => {
+const Sidebar = ({ sidebarOpen }) => {
 
   return (
-    <div
-      ref={sidebarRef}
-      className={`sidebar ${open ? "open" : ""}`}
-    >
+    <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
 
       <Link to="/dashboard">Dashboard</Link>
       <Link to="/subjects">Subjects</Link>

@@ -6,13 +6,14 @@ const SubjectCard = ({ data }) => {
   const navigate = useNavigate();
 
   const openSubject = () => {
-    navigate("/topics", { state: data });
+    navigate(`/topics/${data.name}`);
   };
 
   return (
     <div className="subject-card" onClick={openSubject}>
 
       <h3>{data.name}</h3>
+
       <p>{data.topics} topics</p>
 
     </div>

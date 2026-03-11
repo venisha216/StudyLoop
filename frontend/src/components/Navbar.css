@@ -22,7 +22,11 @@
   align-items:center;
   gap:15px;
 }
-
+.logo{
+  font-size:20px;
+  font-weight:600;
+  color:#9395d3;
+}
 .menu-btn{
   display:none;
   font-size:20px;
@@ -35,6 +39,36 @@
 
   .menu-btn{
     display:block;
+  }
+
+}
+
+/* Hamburger Button */
+
+.hamburger{
+  font-size:20px;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  margin-right:12px;
+  padding:6px 10px;
+  border-radius:6px;
+  transition:0.2s;
+}
+
+/* Hover effect */
+
+.hamburger:hover{
+  background:#f1f2ff;
+}
+
+
+/* Hide hamburger on large screens */
+
+@media (min-width:768px){
+
+  .hamburger{
+    display:none;
   }
 
 }

@@ -22,6 +22,7 @@ function AppRoutes() {
 
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/subjects" element={<SubjectsPage />} />
+        <Route path="/topics/:subjectName" element={<TopicsPage />} />
         <Route path="/topics" element={<TopicsPage />} />
         <Route path="/study-session" element={<StudySessionPage />} />
         <Route path="/study-plan" element={<StudyPlanPage />} />
