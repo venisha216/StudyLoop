@@ -17,8 +17,10 @@ function AppRoutes() {
       <Routes>
 
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+       <Route path="/login" element={<LoginPage />} />
+       <Route path="/signup" element={<SignupPage />} />
+       <Route path="/study-plan" element={<StudyPlanPage />} />
+       <Route path="/profile" element={<ProfilePage />} />
 
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/subjects" element={<SubjectsPage />} />

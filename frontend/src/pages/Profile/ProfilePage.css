@@ -1,0 +1,35 @@
+.page-title{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:25px;
+}
+
+.profile-card{
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  border:1px solid #eee;
+  max-width:420px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
+}
+
+.profile-card p{
+  margin-bottom:12px;
+  font-size:15px;
+}
+
+.logout-btn{
+  margin-top:15px;
+  background:#9395d3;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.logout-btn:hover{
+  background:#7f82d9;
+  transform:translateY(-1px);
+}
