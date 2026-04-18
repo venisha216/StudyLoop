@@ -1,14 +1,32 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import connectDB from "./config/db.js";
+
+import authRoutes from "./routes/authRoutes.js";
+import subjectRoutes from "./routes/subjectRoutes.js";
+import topicRoutes from "./routes/topicRoutes.js";
+import aiRoutes from "./routes/aiRoutes.js";
+
+dotenv.config();
 
 const app = express();
-const PORT = 5000;
-const cors = require("cors");
 
+// middleware
 app.use(cors());
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("StudyLoop API is running");
-});
+// connect DB
+connectDB();
+
+// routes
+app.use("/api/auth", authRoutes);
+app.use("/api/subjects", subjectRoutes);
+app.use("/api/topics", topicRoutes);
+app.use("/api/ai", aiRoutes);
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

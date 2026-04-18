@@ -1,0 +1,88 @@
+.chatbot-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.chatbot-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Chat Window */
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background: #f5f7fb;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Messages */
+.message {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.message.bot {
+  background: #e3e8ff;
+  align-self: flex-start;
+}
+
+.message.user {
+  background: #4f46e5;
+  color: white;
+  align-self: flex-end;
+}
+
+/* Upload Section */
+.upload-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.upload-section input {
+  flex: 1;
+}
+
+.upload-section button {
+  padding: 8px 14px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-section button:hover {
+  background: #4338ca;
+}
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px 15px;
+  background: #ccc;
+  border: none;
+  border-radius: 6px;
+  cursor: not-allowed;
+}

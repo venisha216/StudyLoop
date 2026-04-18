@@ -58,3 +58,37 @@
   color:#9395d3;
   text-decoration:none;
 }
+
+
+/* Focus highlight */
+.auth-card input:focus {
+  outline: none;
+  border: 2px solid #9395d3;
+  box-shadow: 0 0 0 2px rgba(147, 149, 211, 0.2);
+}
+
+/* Button click effect */
+.auth-btn:active {
+  transform: scale(0.97);
+  border: 2px solid #6c70d6;
+}
+
+/* Password wrapper */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+}
+
+/* Eye icon */
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+}

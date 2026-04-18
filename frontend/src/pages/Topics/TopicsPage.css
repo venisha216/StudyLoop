@@ -4,17 +4,38 @@
   margin-bottom:25px;
 }
 
+.topics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .add-topic-container{
   display:flex;
   gap:12px;
   margin-bottom:30px;
 }
 
+/* 🔥 FIX ALIGNMENT */
+.add-topic-container > * {
+  flex: 1;
+}
+
+.add-topic-container button {
+  flex: 0.5;
+}
+
 .add-topic-container input{
-  flex:1;
   padding:12px;
   border-radius:8px;
   border:1px solid #e5e5e5;
+  transition: 0.2s;
+}
+
+.add-topic-container input:focus{
+  outline:none;
+  border-color:#9395d3;
+  box-shadow:0 0 0 2px rgba(147,149,211,0.15);
 }
 
 .add-topic-container button{
@@ -24,6 +45,33 @@
   padding:10px 18px;
   border-radius:8px;
   cursor:pointer;
+  transition:0.2s;
+}
+
+.add-topic-container button:hover{
+  background:#7f82d9;
+}
+
+.add-topic-container button:active{
+  transform: scale(0.96);
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.filter-btn:hover {
+  background: #f0f0ff;
+  border-color:#9395d3;
+}
+
+.filter-dropdown {
+  margin-bottom: 15px;
 }
 
 .card-grid{
@@ -33,9 +81,109 @@
 }
 
 @media (max-width:768px){
-
   .add-topic-container{
     flex-direction:column;
   }
+}
 
+.topic-wrapper {
+  position: relative;
+}
+
+.delete-btn {
+
+  background: white;
+  border: none;
+  cursor: pointer;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.delete-btn:hover {
+  background: #ffe5e5;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+/* ACTION BUTTON CONTAINER */
+.topic-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+/* COMMON STYLE */
+.topic-actions button {
+  background: white;
+  border: none;
+  cursor: pointer;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+/* ICON */
+.topic-actions i {
+  font-size: 13px;
+  color: #555;
+}
+
+/* EDIT */
+.edit-btn:hover {
+  background: #e6f0ff;
+}
+
+.edit-btn:hover i {
+  color: #3b82f6;
+}
+
+/* DELETE */
+.delete-btn:hover {
+  background: #ffe5e5;
+}
+
+.delete-btn:hover i {
+  color: #ff4d4f;
 }

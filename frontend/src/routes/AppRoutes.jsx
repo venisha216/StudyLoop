@@ -10,6 +10,7 @@ import StudySessionPage from "../pages/StudySession/StudySessionPage";
 import StudyPlanPage from "../pages/StudyPlan/StudyPlanPage";
 import TopicDetailsPage from "../pages/TopicDetails/TopicDetailsPage";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import Chatbot from "../pages/Chatbot/Chatbot";
 
 function AppRoutes() {
   return (
@@ -30,6 +31,7 @@ function AppRoutes() {
         <Route path="/study-plan" element={<StudyPlanPage />} />
         <Route path="/topic-details" element={<TopicDetailsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/chatbot" element={<Chatbot />} />
 
       </Routes>
     </Router>

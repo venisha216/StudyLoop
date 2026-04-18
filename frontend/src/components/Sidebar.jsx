@@ -11,7 +11,7 @@ const Sidebar = ({ sidebarOpen }) => {
       <Link to="/topics">Topics</Link>
       <Link to="/study-plan">Study Plan</Link>
       <Link to="/profile">Profile</Link>
-
+      <Link to="/chatbot">Chatbot</Link>
     </div>
   );
 };
