@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import CustomDropdown from "../../components/customDropdown";
+import SmartPlannerButton from "../../components/SmartPlannerButton"
+
 
 import Layout from "../../components/Layout";
 import TopicCard from "../../components/TopicCard";
@@ -40,10 +42,11 @@ const TopicsPage = () => {
       const formatted = res.data.map((t) => ({
         _id: t._id,
         topic: t.name,
-        subjectId: t.subjectId,
-        risk: t.confidenceLevel || "Low",
-        lastStudied: t.lastStudied || "",
-        revisionCount: t.revisionCount || 0,
+        subject: t.subjectId?.name || "No subject",
+        subjectId: t.subjectId?._id || t.subjectId,
+        risk: t.confidenceLevel || "low",
+        revisionCount: t.revisionCount,
+        lastStudied: t.lastStudied,
       }));
 
       setTopics(formatted);
@@ -218,6 +221,7 @@ const TopicsPage = () => {
        />
       )
       }
+      <SmartPlannerButton />
 
     </Layout>
   );

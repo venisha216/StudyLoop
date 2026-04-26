@@ -1,88 +1,157 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
-import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sidebar";
-import ConfidenceSelector from "../../components/ConfidenceSelector";
-import LoadingButton from "../../components/LoadingButton";
-
+import axios from "axios";
+import { createStudySession } from "../../services/studySessionService";
+import Layout from "../../components/Layout";
 import "./StudySessionPage.css";
 
-const StudySessionPage = () => {
 
+const StudySessionPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const topicData = location.state;
-  if (!topicData) {
-    return <p>No topic selected</p>;
-  }
 
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState(false);
 
-  const handleConfidence = (level) => {
+  const handleConfidence = async (level) => {
+    try {
+      setLoading(true);
 
-    console.log("Confidence:", level);
+      const token = localStorage.getItem("token");
 
-    setMessage(`Confidence recorded: ${level}`);
-    setLoading(true);
+      // 🔥 1. GET ALL TOPICS
+      const topicsRes = await axios.get(
+        "http://localhost:5000/api/topics",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    // simulate saving + redirect
-    setTimeout(() => {
-      navigate("/dashboard");
-    }, 1500);
+      // 🔥 2. FIND MATCHING TOPIC
+    // 🔍 DEBUG (keep this once)
+console.log("Topics API FULL:", topicsRes);
 
+// 🔥 SAFE EXTRACTION
+let topicsArray = [];
+
+if (Array.isArray(topicsRes.data)) {
+  topicsArray = topicsRes.data;
+} else if (Array.isArray(topicsRes.data.topics)) {
+  topicsArray = topicsRes.data.topics;
+} else if (Array.isArray(topicsRes.data.data)) {
+  topicsArray = topicsRes.data.data;
+} else {
+  console.error("Unexpected topics format:", topicsRes.data);
+  alert("Error fetching topics");
+  return;
+}
+
+// 🔥 FIND TOPIC
+const topic = topicsArray.find(
+  (t) => t.name === topicData.topic
+);
+
+      if (!topic) {
+        alert("Topic not found");
+        return;
+      }
+
+      // 🔥 3. UPDATE TOPIC (confidence + revision)
+      await axios.put(
+        `http://localhost:5000/api/topics/${topic._id}`,
+        {
+          confidenceLevel: level,
+          lastStudied: new Date(),
+          revisionCount: topic.revisionCount + 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // 🔥 4. SAVE STUDY SESSION (your existing logic)
+      await createStudySession({
+        topicId: topic._id,
+        confidence: level,
+      });
+
+      // ✅ show toast
+      setToast(true);
+
+      // ⏳ redirect to Study Plan (better UX)
+      setTimeout(() => {
+        const redirectPath = topicData.from || "/dashboard";
+
+navigate(redirectPath, {
+  state: { selectedSubject: topicData.subject },
+});
+      }, 1200);
+
+    } catch (err) {
+      console.error("Study session error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="dashboard-container">
+    <Layout>
 
-      <Navbar />
+      <div className="study-session-card">
 
-      <div className="dashboard-main">
+        <h2>{topicData?.topic}</h2>
+        <p className="topic-sub">{topicData?.subject}</p>
 
-        <Sidebar />
+        <h3>How well did you understand?</h3>
 
-        <div className="dashboard-content">
+        {/* 🔥 CARDS */}
+        <div className="confidence-grid">
 
-  <div className="study-session-wrapper">
+          <div
+            className="confidence-card low"
+            onClick={() => handleConfidence("low")}
+          >
+            <div className="confidence-emoji">😟</div>
+            <div className="confidence-level">Low</div>
+            <div className="confidence-label">Needs revision soon</div>
+          </div>
 
-    <div className="study-card">
+          <div
+            className="confidence-card medium"
+            onClick={() => handleConfidence("medium")}
+          >
+            <div className="confidence-emoji">😐</div>
+            <div className="confidence-level">Medium</div>
+            <div className="confidence-label">Almost there</div>
+          </div>
 
-      <h1 className="study-session-title">
-        {topicData?.topic}
-      </h1>
+          <div
+            className="confidence-card high"
+            onClick={() => handleConfidence("high")}
+          >
+            <div className="confidence-emoji">😊</div>
+            <div className="confidence-level">High</div>
+            <div className="confidence-label">Well understood</div>
+          </div>
 
-      <p className="study-session-subject">
-        {topicData?.subject}
-      </p>
-
-      <p className="study-session-instruction">
-        Study the topic, then rate your confidence
-      </p>
-
-      <ConfidenceSelector onSelect={handleConfidence} />
-
-      {message && (
-        <div className="confidence-message">
-          ✔ {message}
-        </div>
-      )}
-
-      {loading && (
-        <LoadingButton text="Returning to dashboard..." />
-      )}
-
-    </div>
-
-  </div>
-
-</div>
         </div>
 
       </div>
 
+      {/* 🔥 TOAST */}
+      {toast && (
+        <div className="toast">
+          Study session saved! Updating progress...
+        </div>
+      )}
+
+    </Layout>
   );
 };
 

@@ -64,7 +64,8 @@ export const getTopics = async (req, res) => {
     }
 
     const topics = await Topic.find(filter)
-      .sort({ createdAt: -1 });
+    .populate("subjectId", "name")
+    .sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,

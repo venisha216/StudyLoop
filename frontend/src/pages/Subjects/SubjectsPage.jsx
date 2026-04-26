@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import SmartPlannerButton from "../../components/SmartPlannerButton"
 import Layout from "../../components/Layout";
 import SubjectCard from "../../components/SubjectCard";
 
@@ -102,27 +102,27 @@ const SubjectsPage = () => {
   };
 
   return (
-    <Layout>
-      <h1 className="page-title">Subjects</h1>
+  <Layout>
+    <h1 className="page-title">Subjects</h1>
 
-      {/* ADD SUBJECT */}
-      <div className="add-subject-container">
-        <input
-          type="text"
-          placeholder="Enter subject name"
-          value={subjectInput}
-          onChange={(e) => setSubjectInput(e.target.value)}
-        />
+    {/* ADD SUBJECT */}
+    <div className="add-subject-container">
+      <input
+        type="text"
+        placeholder="Enter subject name"
+        value={subjectInput}
+        onChange={(e) => setSubjectInput(e.target.value)}
+      />
+      <button onClick={handleAddSubject}>Add Subject</button>
+    </div>
 
-        <button onClick={handleAddSubject}>Add Subject</button>
-      </div>
+    {/* SUBJECTS SECTION */}
+    <div className="subjects-section">
 
-      {/* SUBJECT LIST */}
       <div className="card-grid">
         {subjects.map((item) => (
           <div key={item._id} className="subject-wrapper">
 
-            {/* ✏️ EDIT MODE */}
             {editingId === item._id ? (
               <input
                 className="edit-input"
@@ -141,10 +141,7 @@ const SubjectsPage = () => {
               </div>
             )}
 
-            {/* ACTION BUTTONS */}
             <div className="subject-actions">
-              
-              {/* EDIT */}
               <button
                 className="edit-btn"
                 onClick={(e) => {
@@ -155,7 +152,6 @@ const SubjectsPage = () => {
                 <i className="fa-solid fa-pen"></i>
               </button>
 
-              {/* DELETE */}
               <button
                 className="delete-btn"
                 onClick={(e) => {
@@ -165,37 +161,43 @@ const SubjectsPage = () => {
               >
                 <i className="fa-solid fa-trash"></i>
               </button>
-
             </div>
+
           </div>
         ))}
       </div>
 
-      {/* DELETE MODAL */}
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <p>
-              Do you want to delete <b>{selectedSubject?.name}</b> subject?
-            </p>
+      {/* ✅ SINGLE BUTTON ONLY */}
+      <div className="planner-btn-container">
+        <SmartPlannerButton />
+      </div>
 
-            <div className="modal-actions">
-              <button className="confirm-btn" onClick={confirmDelete}>
-                Yes
-              </button>
+    </div>
 
-              <button
-                className="cancel-btn"
-                onClick={() => setShowModal(false)}
-              >
-                Cancel
-              </button>
-            </div>
+    {/* MODAL */}
+    {showModal && (
+      <div className="modal-overlay">
+        <div className="modal-box">
+          <p>
+            Do you want to delete <b>{selectedSubject?.name}</b> subject?
+          </p>
+
+          <div className="modal-actions">
+            <button className="confirm-btn" onClick={confirmDelete}>
+              Yes
+            </button>
+
+            <button
+              className="cancel-btn"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
           </div>
         </div>
-      )}
-    </Layout>
-  );
-};
+      </div>
+    )}
+  </Layout>
+);}
 
 export default SubjectsPage;

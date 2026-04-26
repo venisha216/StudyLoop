@@ -1,35 +1,113 @@
-.page-title{
-  font-size:28px;
-  font-weight:600;
-  margin-bottom:25px;
+.page-title {
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 
-.profile-card{
-  background:white;
-  padding:30px;
-  border-radius:12px;
-  border:1px solid #eee;
-  max-width:420px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.05);
+/* Layout */
+.profile-grid {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
 }
 
-.profile-card p{
-  margin-bottom:12px;
-  font-size:15px;
+/* LEFT CARD */
+.profile-card {
+  width: 280px;
+  min-width: 260px;
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
 }
 
-.logout-btn{
-  margin-top:15px;
-  background:#9395d3;
-  color:white;
-  border:none;
-  padding:10px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:0.2s;
+/* Profile pic */
+.profile-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-.logout-btn:hover{
-  background:#7f82d9;
-  transform:translateY(-1px);
+.profile-pic img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+/* Button */
+.edit-btn {
+  background: #eee;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.edit-btn:hover {
+  background: #ddd;
+}
+
+/* Name */
+.user-name {
+  margin-top: 10px;
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  background: #f8f9fc;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.stat-box h3 {
+  margin: 0;
+}
+
+/* RIGHT SIDE */
+.profile-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Revisions */
+.revision-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+/* Badges */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
 }

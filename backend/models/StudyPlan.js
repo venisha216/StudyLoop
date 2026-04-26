@@ -8,15 +8,22 @@ const studyPlanSchema = new mongoose.Schema(
       required: true,
     },
 
+    subjectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subject",
+      required: true,
+    },
+
     date: {
       type: Date,
       required: true,
     },
 
-    topics: [
+    // 🔥 ACTUAL STUDY PLAN (weekly)
+    plan: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Topic",
+        week: Number,
+        content: String,
       },
     ],
   },

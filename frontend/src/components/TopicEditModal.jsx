@@ -20,7 +20,7 @@ const TopicEditModal = ({ topic, onClose, onUpdate }) => {
 
   const formatDate = (date) => {
   if (!date) return "";
-  return new Date(date).toISOString().split("T")[0]; // ✅ FIX
+  return new Date(date).toISOString().split("T")[0]; //  FIX
 };
 
 const [lastStudied, setLastStudied] = useState(
@@ -49,7 +49,7 @@ const [lastStudied, setLastStudied] = useState(
 
     const res = await updateTopic(topic._id, payload);
 
-    onUpdate(res.data);   // ✅ FIXED
+    onUpdate(res.data);   //  FIXED
     onClose();
 
   } catch (err) {
