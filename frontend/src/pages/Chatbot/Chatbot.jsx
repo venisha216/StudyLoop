@@ -1,68 +1,139 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import Layout from "../../components/Layout";
+import toast from "react-hot-toast";
 import "./Chatbot.css";
 
 const Chatbot = () => {
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hi! Upload a document and I’ll summarize it and create a quiz for you 📄✨" }
-  ]);
+  const [messages, setMessages] = useState(() => {
+    const saved = localStorage.getItem("chatMessages");
+    return saved
+      ? JSON.parse(saved)
+      : [
+          {
+            sender: "bot",
+            text: "Hi! Ask anything or upload a document 📄",
+          },
+        ];
+  });
 
+  const [input, setInput] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("chatMessages", JSON.stringify(messages));
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const formatMessagesForAPI = () => {
+    return messages.map((msg) => ({
+      role: msg.sender === "user" ? "user" : "assistant",
+      content: msg.text,
+    }));
   };
 
-  const handleUpload = async () => {
-    if (!file) return;
+  const handleSubmit = async () => {
+    if (!input && !file) {
+      toast.error("Provide text or file");
+      return;
+    }
 
     setLoading(true);
 
-    // TEMP MOCK RESPONSE (replace with backend later)
-    setTimeout(() => {
+    try {
+      let response;
+
+      if (file) {
+        if (file.size > 10 * 1024 * 1024) {
+          toast.error("File must be less than 10MB");
+          setLoading(false);
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append(
+          "messages",
+          JSON.stringify(formatMessagesForAPI())
+        );
+
+        response = await axios.post(
+          "http://localhost:5000/api/ai/analyze",
+          formData
+        );
+      } else {
+        response = await axios.post(
+          "http://localhost:5000/api/ai/analyze",
+          {
+            text: input,
+            messages: formatMessagesForAPI(),
+          }
+        );
+      }
+
       setMessages((prev) => [
         ...prev,
-        { sender: "user", text: `Uploaded: ${file.name}` },
-        { sender: "bot", text: "📌 Summary:\n- Point 1\n- Point 2\n- Point 3" },
-        { sender: "bot", text: "🧠 Quiz:\n1. Question?\nA) Option\nB) Option\nC) Option\nD) Option" }
+        { sender: "user", text: input || `📄 ${file.name}` },
+        { sender: "bot", text: response.data.result },
       ]);
-      setLoading(false);
-    }, 1500);
+
+      setInput("");
+      setFile(null);
+
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong");
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div className="chatbot-container">
-      <h2 className="chatbot-title">AI Study Assistant</h2>
+    <Layout>
+      <div className="chatbot-container">
 
-      {/* Chat Messages */}
-      <div className="chat-window">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender}`}>
-            {msg.text.split("\n").map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
-          </div>
-        ))}
+        <h2 className="chatbot-title">AI Study Assistant</h2>
 
-        {loading && <div className="message bot">Thinking...</div>}
+        <div className="chat-window">
+          {messages.map((msg, i) => (
+            <div key={i} className={`message ${msg.sender}`}>
+              {msg.text.split("\n").map((line, idx) => (
+                <p key={idx}>{line}</p>
+              ))}
+            </div>
+          ))}
+
+          {loading && (
+            <div className="message bot">Thinking...</div>
+          )}
+
+          <div ref={chatEndRef} />
+        </div>
+
+        <div className="upload-section">
+          <input
+            type="file"
+            accept=".pdf,.docx"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </div>
+
+        <div className="chat-input">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask anything..."
+          />
+          <button onClick={handleSubmit}>
+            Send
+          </button>
+        </div>
+
       </div>
-
-      {/* File Upload Section */}
-      <div className="upload-section">
-        <input
-          type="file"
-          accept=".doc,.docx"
-          onChange={handleFileChange}
-        />
-        <button onClick={handleUpload}>Upload & Analyze</button>
-      </div>
-
-      {/* Input box (future use) */}
-      <div className="chat-input">
-        <input type="text" placeholder="Ask something..." disabled />
-        <button disabled>Send</button>
-      </div>
-    </div>
+    </Layout>
   );
 };
 

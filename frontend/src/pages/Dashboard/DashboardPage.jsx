@@ -57,14 +57,17 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
-  const today = new Date();
 
-  const todaysTopics = topics.filter(
-    (t) =>
-      t.nextReviewDate &&
-      new Date(t.nextReviewDate) <= today
-  );
+  // 📅 TODAY'S STUDY PLAN
+const today = new Date();
 
+const todaysTopics = topics.filter((t) => {
+  // 🔥 Show new topics immediately
+  if (!t.nextReviewDate) return true;
+
+  const reviewDate = new Date(t.nextReviewDate);
+  return reviewDate <= today;
+});
   const highRiskTopics = topics.filter(
     (t) => t.confidenceLevel === "low"
   );
